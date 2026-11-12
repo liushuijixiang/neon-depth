@@ -1,0 +1,73 @@
+/* SKIN_V36 · 统一视觉 */
+#m3bgLayer{position:absolute;inset:0;width:100%;height:100%;z-index:8;display:none;pointer-events:none}
+body.m3menu #m3bgLayer{display:block}
+#overlay.m3skin{background:linear-gradient(180deg,rgba(3,6,11,.2),rgba(3,6,11,.55) 60%,rgba(3,6,11,.85))}
+#overlay.m3skin>.card{max-width:560px;width:100%;height:100%;max-height:100%}
+.card{clip-path:none!important;border-radius:14px!important;border:1px solid rgba(160,200,230,.14)!important;background:linear-gradient(170deg,rgba(13,21,33,.9),rgba(5,9,15,.94))!important;box-shadow:0 24px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.card::before{inset:0;border-radius:14px!important;background:linear-gradient(90deg,transparent 6%,var(--acc,#22e6ff) 50%,transparent 94%) top/100% 1px no-repeat!important;opacity:.8}
+.cyberpanel::after,.card::after{display:none!important}
+.card.menu3{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none}
+.card.menu3::before{display:none}
+.card .kicker{letter-spacing:.32em}
+.card .title{letter-spacing:.1em}
+.cta{border:0!important;border-radius:10px!important;color:#04121a!important;font-weight:800;text-shadow:none!important;background:linear-gradient(100deg,var(--acc,#22e6ff),color-mix(in srgb,var(--acc,#22e6ff) 50%,#fff))!important;box-shadow:0 6px 22px color-mix(in srgb,var(--acc,#22e6ff) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.35)!important}
+.cta:disabled{filter:grayscale(.8) brightness(.55);box-shadow:none!important}
+.cta::after{display:none!important}
+.cta:active:not(:disabled){transform:translateY(1px) scale(.99)}
+.ghost{border-radius:10px!important;background:rgba(10,16,24,.62)!important;border:1px solid rgba(160,200,230,.2)!important;color:#cfe8ff}
+.tab{border-radius:18px!important;background:rgba(10,16,24,.55)!important;border:1px solid rgba(160,200,230,.18)!important}
+.tab.on{background:color-mix(in srgb,var(--acc,#22e6ff) 20%,rgba(10,16,24,.6))!important;border-color:var(--acc,#22e6ff)!important;color:#fff!important}
+.cnode,.srow,.pitem,.scard,.boon,.contract,.lcard,.scy,.eq-card,.ws-card,.tkt,.mchip,.cdx,.legend,.ach,.corp-job,.corpset,.chipcard{border-radius:10px!important}
+.srow,.cnode,.boon,.scard{background:linear-gradient(110deg,rgba(255,255,255,.035),rgba(8,14,22,.55))!important}
+.stickybar,.dock{background:linear-gradient(180deg,transparent,rgba(5,9,15,.92) 45%)!important;border:0!important}
+#overlay.m3skin .card .hint{color:#8fa6b4}
+.cnode.pournode.unlockfx{animation:m3unlock .6s ease-out}
+@keyframes m3unlock{0%{box-shadow:0 0 0 0 rgba(87,255,168,.9);filter:brightness(1.8)}100%{box-shadow:0 0 0 14px rgba(87,255,168,0);filter:none}}
+.card.bar.cleared .sign i{color:#ff365c;border-color:#ff365c;box-shadow:0 0 16px #ff365c}
+/* 首页 */
+.m3-hero.logo{padding:18px 0 6px}
+.m3-logobox{width:min(64vw,250px);aspect-ratio:240/200}
+.m3-logoart{width:100%;height:100%;overflow:visible}
+.m3-logoart .ring{transform-origin:120px 92px;animation:m3spin 18s linear infinite}.m3-logoart .r2{animation-duration:11s;animation-direction:reverse}
+@keyframes m3spin{to{transform:rotate(360deg)}}
+.m3-logoart .well{filter:drop-shadow(0 0 6px #22e6ff)}
+.m3-logoart .diver{animation:m3dive 3.2s cubic-bezier(.6,0,.4,1) infinite;filter:drop-shadow(0 0 6px #fcee0a)}
+@keyframes m3dive{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(96px);opacity:0}}
+.m3-bigtitle{text-align:center;margin-top:-4px}
+.m3-bigtitle b{position:relative;display:inline-block;font-size:34px;font-weight:900;letter-spacing:.14em;color:#fff;text-shadow:0 0 20px rgba(34,230,255,.6)}
+.m3-bigtitle b::before,.m3-bigtitle b::after{content:attr(data-t);position:absolute;inset:0;opacity:.7}
+.m3-bigtitle b::before{color:#ff2fa8;animation:m3gl1 3.4s steps(1) infinite}.m3-bigtitle b::after{color:#22e6ff;animation:m3gl2 3.4s steps(1) infinite}
+@keyframes m3gl1{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}93%{transform:translate(-3px,1px);clip-path:inset(20% 0 50% 0)}96%{transform:translate(2px,-1px);clip-path:inset(60% 0 10% 0)}}
+@keyframes m3gl2{0%,90%,100%{transform:none;clip-path:inset(0 0 100% 0)}91%{transform:translate(3px,0);clip-path:inset(40% 0 30% 0)}95%{transform:translate(-2px,1px);clip-path:inset(5% 0 70% 0)}}
+.m3-bigtitle span{display:block;font-size:12px;letter-spacing:.8em;color:#9fc4d8;margin-top:4px;padding-left:.8em}
+.m3-hero.face{padding-top:4px}
+.m3-portrait{position:relative;width:min(56vw,220px);aspect-ratio:200/220;color:var(--mc);overflow:hidden;-webkit-mask:linear-gradient(180deg,#000 70%,transparent);mask:linear-gradient(180deg,#000 70%,transparent)}
+.m3-portrait svg{width:100%;height:100%;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--mc) 50%,transparent))}
+.m3-face .hair{fill:#0c141d;stroke:currentColor;stroke-width:1.6}.m3-face .skin{fill:#152230;stroke:currentColor;stroke-width:1.8}
+.m3-face .ln{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}.m3-face .ln.dim{opacity:.4}
+.m3-face .eye{stroke:#fff;stroke-width:3;stroke-linecap:round;fill:#fff;filter:drop-shadow(0 0 4px currentColor);animation:m3blink 5s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes m3blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.m3-face .scar{stroke:#ff365c;stroke-width:2.2;stroke-linecap:round}
+.m3-face .cloth{fill:#0d1822;stroke:currentColor;stroke-width:1.6}
+.m3-face .gog{fill:color-mix(in srgb,currentColor 35%,transparent);stroke:currentColor;stroke-width:2}
+.m3-face .visor{fill:currentColor;opacity:.85;filter:drop-shadow(0 0 6px currentColor)}
+.m3-face .wing{fill:currentColor;opacity:.45}
+.m3-portrait .scan{position:absolute;left:0;right:0;height:18%;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--mc) 25%,transparent),transparent);animation:m3scan 3.6s linear infinite}
+@keyframes m3scan{from{top:-20%}to{top:100%}}
+/* 余烬列表不换行 */
+.m3-list button{grid-template-columns:28px minmax(0,1fr) auto 16px!important}
+.m3-list button>b{white-space:nowrap}
+.m3-list button>small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;text-align:right}
+.m3-list .m3-dot{position:absolute!important;left:34px;top:10px;margin:0}
+/* 模式卡里的挑战树 */
+.m3-mode{cursor:pointer}
+.m3-chalchip{display:inline-flex!important;align-items:center;gap:6px;margin-top:8px;padding:4px 10px;font-size:10px;color:#ff9aa5;background:rgba(40,8,14,.55);border:1px solid rgba(255,77,94,.5);border-radius:14px}
+.m3-chalchip b{color:#fff;letter-spacing:.12em}
+/* 战备 */
+.prepgauge{margin:6px 0 8px}
+/* 制式券详情 */
+.tkt-items{display:grid!important;grid-template-columns:1fr 1fr;gap:6px;width:100%}
+.tkt-items .cnode{width:auto!important;margin:0!important}
+/* 感谢游玩 */
+.card.thanks{text-align:center;display:flex;flex-direction:column;justify-content:center}
+.card.thanks .m3-emblem.thx{width:min(52vw,200px);margin:0 auto;animation:none}

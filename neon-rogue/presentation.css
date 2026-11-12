@@ -1,0 +1,44 @@
+.chip-hardware{display:block;position:relative;isolation:isolate;width:100%;aspect-ratio:1;pointer-events:none}
+.chip-hardware canvas{display:block;width:100%;height:100%;filter:drop-shadow(0 4px 4px #0009)}
+.chipico .chip-hardware{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto}
+.chipico .chip-hardware canvas{width:100%;height:100%;object-fit:contain}
+.chipico:has(.chip-hardware){background:linear-gradient(145deg,#142029,#070c12);border-color:color-mix(in srgb,var(--cq) 55%,#263b43);overflow:hidden}
+.chipico:has(.chip-hardware)>.pins{display:none}
+:is(.chipico,.srow.chiprow .chipico,.mchip .chipico,.sock .chipico):has(>.chip-hardware)>b{position:absolute;left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);width:22px;height:22px;display:flex;align-items:center;justify-content:center;line-height:1;margin:0!important;padding:0!important;border:0;clip-path:none;background:#091219cc;text-align:center;font-size:11px;z-index:2;letter-spacing:0}
+.chipico:has(.chip-hardware)>span{bottom:2px;background:#061017df;font-size:9px;line-height:12px;z-index:3;margin:0}
+.chipico:has(.chip-hardware)>em{top:3px;bottom:auto;z-index:3}
+.chipico:has(.chip-hardware)>s,.chipico:has(.chip-hardware)>small{z-index:4}
+.chipico>.mechb{display:none!important}
+.chip-hardware::after{content:"";position:absolute;inset:4%;z-index:1;pointer-events:none;background:linear-gradient(115deg,transparent 30%,color-mix(in srgb,var(--hardware-ink,#22e6ff) 12%,transparent) 44%,#e8ffff55 50%,transparent 58%);opacity:0;transform:translateX(-75%);mix-blend-mode:screen}
+.chip-hardware::before{content:"";position:absolute;left:19%;top:21%;width:2px;height:2px;border-radius:50%;background:var(--hardware-ink,#22e6ff);box-shadow:21px 23px 0 var(--hardware-ink,#22e6ff),37px 44px 0 var(--hardware-ink,#22e6ff);z-index:1;opacity:0;pointer-events:none}
+.chip-hardware.is-visible::after{animation:hardwareShimmer 4.8s ease-in-out infinite;animation-delay:var(--hardware-phase,0s)}
+.chip-hardware.is-visible::before{animation:hardwareFlow 3.6s ease-in-out infinite;animation-delay:var(--hardware-phase,0s)}
+.hardware-paused .chip-hardware::after,.hardware-paused .chip-hardware::before,#overlay:not(.show) .chip-hardware::after,#overlay:not(.show) .chip-hardware::before{animation-play-state:paused;opacity:0}
+@keyframes hardwareShimmer{0%,65%,100%{opacity:0;transform:translateX(-75%)}72%{opacity:.55}86%{opacity:0;transform:translateX(75%)}}
+@keyframes hardwareFlow{0%,65%,100%{opacity:0;transform:translate(0,0)}72%{opacity:.8}90%{opacity:0;transform:translate(9px,12px)}}
+.chipico.heavy{border-style:solid;box-shadow:inset 0 0 0 1px #be865740,0 0 10px #0007}
+.chipcard.has-hardware{display:grid;grid-template-columns:minmax(76px,32%) minmax(0,1fr);gap:3px 10px;text-align:left;align-items:center;padding:12px;overflow:hidden;position:relative;background:linear-gradient(125deg,#14232bd9,#070c13 80%);border-color:color-mix(in srgb,var(--cq) 60%,#172a36);box-shadow:inset 0 1px #ffffff0c,0 5px 20px #0005}
+.chipcard.has-hardware>.chip-hardware{grid-column:1;grid-row:1 / span 7;min-width:0;align-self:center}
+.chipcard.has-hardware>.chipico{grid-column:1;grid-row:1 / span 7;min-width:0;width:100%;height:auto;aspect-ratio:1;margin:0;align-self:center}
+.chipcard.has-hardware>.chipico:has(>.chip-hardware)>b{font-size:clamp(11px,3vw,16px)}
+.chipcard.has-hardware>b,.chipcard.has-hardware>.cmain,.chipcard.has-hardware>.caf{grid-column:2;min-width:0;overflow-wrap:anywhere;margin:0;line-height:1.55}
+.chipcard.has-hardware>b{color:var(--cq);font-size:12px}
+.chipcard.has-hardware .caf{font-size:10px;border:0;padding:2px 0;background:transparent}
+.chipcard.has-hardware .caf.heavy{color:#e6b87b;border-top:1px solid #ae815e38;margin-top:3px;padding-top:4px}
+.forge-stage{isolation:isolate;background:radial-gradient(ellipse at center,#16304370 0,#050c1499 58%,#03070b 100%);border:1px solid #52708040;border-radius:10px;min-height:210px;padding:20px 10px;overflow:hidden;box-shadow:inset 0 0 32px #000a}
+.forge-stage::before{content:"";position:absolute;inset:8px;pointer-events:none;background:linear-gradient(90deg,#719eb444 1px,transparent 1px) 0 0/18px 18px,linear-gradient(#719eb422 1px,transparent 1px) 0 0/18px 18px;mask-image:radial-gradient(ellipse,#0008,transparent 75%);z-index:-1}
+.forge-stage::after{content:"";position:absolute;left:4%;right:4%;top:calc(12% + var(--forge-progress,0)*75%);height:1px;opacity:0;background:var(--fq);box-shadow:0 0 8px 1px var(--fq),0 -12px 24px color-mix(in srgb,var(--fq) 25%,transparent);pointer-events:none;z-index:5}
+.forge-stage.spinning::after,.forge-stage.charging::after{opacity:.9}
+.forge-stage .forge-ring{width:185px;height:185px;border:1px solid color-mix(in srgb,var(--fq) 22%,transparent);border-radius:50%;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--fq) 50%,transparent) 0deg 1deg,transparent 1deg 12deg);mask-image:radial-gradient(transparent 62%,#000 63%,#000 66%,transparent 67%,transparent 88%,#000 89%);opacity:.55}
+.forge-stage .forge-chip{width:94%;position:relative;z-index:2}
+.forge-stage.spinning .chipcard{animation:chipScan .6s linear infinite}
+.forge-stage.spinning .chip-hardware canvas{animation:chipRebuild .9s ease-in-out infinite}
+.forge-stage.done .chipcard{animation:chipLock .55s ease-out}
+.forge-cmp{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-top:8px}
+.forge-cmp>div{min-width:0;border-radius:6px;padding:9px;background:#08121ddd}
+.forge-cmp .new{border-color:var(--fq);box-shadow:inset 0 0 14px color-mix(in srgb,var(--fq) 10%,transparent)}
+.forge-cmp .caf{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.7}
+@keyframes chipScan{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
+@keyframes chipRebuild{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px);filter:drop-shadow(0 9px 5px #0009)}}
+@keyframes chipLock{0%{filter:brightness(1.8)}100%{filter:brightness(1)}}
+:root[data-neon-motion="reduced"] .forge-stage .chipcard,:root[data-neon-motion="reduced"] .forge-stage .chip-hardware canvas,:root[data-neon-motion="reduced"] .chip-hardware::after,:root[data-neon-motion="reduced"] .chip-hardware::before{animation:none!important}

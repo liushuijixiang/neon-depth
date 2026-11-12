@@ -1,0 +1,20 @@
+const { chromium } = require('playwright'), path = require('path'); const ROOT = path.resolve(__dirname, '..');
+(async () => {
+  const b = await chromium.launch({ args: ['--no-sandbox'] }); const page = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1.5 });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.addInitScript(() => { localStorage.setItem('neon-depth-mute', '1'); localStorage.removeItem('neon-depth-run'); localStorage.setItem('neon-depth-meta', JSON.stringify({ cores: 640, up: { b1: 1 }, stash: { cyber: [{ id: 'hand_red', chips: [] }, { id: 'eye_blue', chips: [] }], chips: [] }, tickets: [] })); });
+  await page.goto('file://' + path.join(ROOT, 'dist.debug.html')); await page.waitForTimeout(900);
+  const shot = async (n) => { await page.waitForTimeout(550); await page.screenshot({ path: path.join(ROOT, 'shots', 'v36-' + n + '.png') }); };
+  await shot('home');
+  await page.click('#actionBtn'); await shot('mode');
+  await page.click('[data-mode="normal"]'); await page.click('[data-flow-cls="engineer"]'); await shot('prep');
+  await page.evaluate(() => { const N = window.__neon; N.test.ui.menuScreen('cyber'); }); await page.click('[data-mnact="market:cyber"]'); await shot('market');
+  await page.evaluate(() => { window.__neon.test.ui.menuScreen('neuro'); }); await page.click('[data-mnact="meta"]'); await shot('meta');
+  await page.evaluate(() => { window.__neon.test.ui.menuScreen('ember'); }); await page.click('[data-mnact="bar"]'); await shot('bar');
+  await page.evaluate(() => { window.__neon.test.ui.menuScreen('ember'); }); await page.click('[data-mnact="dream"]'); await shot('dream');
+  await page.evaluate(() => { window.__neon.test.ui.menuScreen('cyber'); }); await page.click('[data-mnact="market:ticket"]'); await page.click('[data-mticket]'); await shot('ticket');
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'assault'; G.trainPending = false; N.startGame(); N.test.hideOverlay(); G.modal = null; G.paused = false; G.storyQueue = []; N.saveRun && N.saveRun(true); });
+  await page.evaluate(() => { const N = window.__neon, G = N.G; N.test.hideOverlay(); G.state = 'menu'; N.test.ui.menuScreen('depart'); });
+  await shot('home-save');
+  console.log('errors', JSON.stringify(errs)); await b.close();
+})();

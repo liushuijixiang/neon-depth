@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<script src="motion-preference.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="霓虹深潜" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
+<meta name="theme-color" content="#04060b" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>霓虹深潜 · NEON DEPTH</title>
+<link rel="stylesheet" href="ui.css" />
+<link rel="stylesheet" href="polish.css" />
+<link rel="stylesheet" href="presentation.css" />
+<link rel="stylesheet" href="enhancement-wheel.css" />
+<link rel="stylesheet" href="v1.css" />
+</head>
+<body>
+<div id="app">
+  <header class="hud">
+    <div class="hp">
+      <span class="lbl">HP</span>
+      <div class="hpbar"><div id="hpfill"></div><div id="shfill"></div></div>
+      <span id="shieldorb" class="shieldorb"><b id="shnum">0</b></span>
+      <span id="hptext" class="num">32/32</span>
+    </div>
+    <div class="meta">
+      <span id="depth" class="chip">B1F</span>
+      <span id="lvl" class="chip">LV.1</span>
+      <span id="atk" class="chip">ATK 5</span>
+      <span id="cls" class="chip">突袭者</span>
+      <span id="credits" class="chip credits" style="display:none">¥0</span>
+      <span id="bagchip" class="chip bagchip" role="button" style="display:none">包 0/6</span>
+      <span id="chromeload" class="chip chromeload" style="display:none" role="button" aria-label="义体负载"><i></i><b>负载</b></span>
+      <span id="combo" class="chip" style="display:none">x2</span>
+      <span id="scrap" class="chip" style="display:none">废料 0</span>
+      <span id="gun" class="chip" style="display:none">能量 6 · 弹 6/6</span>
+      <span id="score" class="chip score">0</span>
+      <button id="menuBtn" class="icon" aria-label="菜单">☰</button>
+      <button id="mute" class="icon" aria-label="音效">♪</button>
+    </div>
+    <div id="bossrow" class="bossrow" style="display:none">
+      <span id="bossname" class="bossname">守卫</span>
+      <div class="bossbar"><i id="bossfill"></i><span class="bmark" style="left:25%"></span><span class="bmark" style="left:50%"></span><span class="bmark" style="left:75%"></span></div>
+      <div id="bosscharge" class="bosscharge" role="progressbar" aria-label="守卫蓄力进度"><i id="bosschargefill"></i></div>
+      <div id="bosscomms" class="bosscomms" aria-live="polite"><b id="bosscomms-src"></b><span id="bosscomms-text"></span></div>
+    </div>
+    <div id="buffs" class="buffrow"></div>
+    <div class="xpbar"><i id="xpfill"></i></div>
+  </header>
+
+  <main id="stage">
+    <canvas id="game"></canvas>
+    <!-- CHROME_BOSS_STAGE_V1: fictional enemy channel; no system UI or permissions. -->
+    <div id="bossinvasion" aria-hidden="true" hidden></div>
+    <div id="questtrack" class="qtrack"></div>
+    <div id="toasts" class="toasts"></div>
+    <div id="log" class="log"></div>
+    <div id="floorbanner" class="floorbanner" aria-live="polite"></div>
+    <div id="bossbanner" class="bossbanner">
+      <div class="bb-k" id="bbk">GUARDIAN // 守卫</div>
+      <div class="bb-name" id="bbname"></div>
+      <div class="bb-intro" id="bbintro"></div>
+    </div>
+    <button id="zoombtn" class="zoombtn" style="display:none" aria-label="视野缩放"></button>
+    <button id="trainbtn" class="trainbtn" style="display:none">训练</button>
+    <button id="cyberbtn" class="cyberbtn" style="display:none" aria-label="义体装配">
+      <svg class="cicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="6" width="12" height="12" rx="2.5"/>
+        <circle cx="12" cy="12" r="2.4"/>
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.4 2.4M19 5l-2.4 2.4M5 19l2.4-2.4M19 19l-2.4-2.4"/>
+      </svg>
+      <span class="cbadge" id="cybercount">0</span>
+    </button>
+    </main>
+
+  <div id="invbar" class="invbar"></div>
+  <div id="critbar" class="critbar" style="display:none">
+    <div class="critfill" id="critfill"></div>
+    <span class="critmark" style="left:40%"></span>
+    <span class="critmark" style="left:70%"></span>
+    <span class="crittick" style="left:40%">中</span>
+    <span class="crittick" style="left:70%">高</span>
+    <div class="critlabel" id="critlabel">临界 25</div>
+  </div>
+  <div id="abilitybar" class="abbar"></div>
+
+  <section class="pad">
+    <div class="dpad">
+      <button class="key" data-dx="-1" data-dy="-1" aria-label="左上">↖</button>
+      <button class="key" data-dx="0"  data-dy="-1" aria-label="上">↑</button>
+      <button class="key" data-dx="1"  data-dy="-1" aria-label="右上">↗</button>
+      <button class="key" data-dx="-1" data-dy="0"  aria-label="左">←</button>
+      <button class="key wait" data-dx="0" data-dy="0" aria-label="等待">◉</button>
+      <button class="key" data-dx="1"  data-dy="0"  aria-label="右">→</button>
+      <button class="key" data-dx="-1" data-dy="1"  aria-label="左下">↙</button>
+      <button class="key" data-dx="0"  data-dy="1"  aria-label="下">↓</button>
+      <button class="key" data-dx="1"  data-dy="1"  aria-label="右下">↘</button>
+    </div>
+  </section>
+
+  <div id="overlay" class="overlay"></div>
+</div>
+
+<script src="native-compatibility.js"></script>
+<!-- CONTENT:START -->
+<script src="content/monsters.js"></script>
+<script src="content/monsters_stage2.js"></script>
+<script src="content/monsters_stage3.js"></script>
+<script src="content/skills.js"></script>
+<script src="content/items.js"></script>
+<script src="content/buffs.js"></script>
+<script src="content/consumables.js"></script>
+<script src="content/quests.js"></script>
+<script src="content/achievements.js"></script>
+<script src="content/boons.js"></script>
+<script src="content/bosses_low.js"></script>
+<script src="content/bosses_high.js"></script>
+<script src="content/tactics.js"></script>
+<script src="content/story.js"></script>
+<script src="content/scenes_v1.js"></script>
+<script src="content/story2.js"></script>
+<script src="content/neta.js"></script>
+<script src="content/corps.js"></script>
+<script src="content/finale.js"></script>
+<script src="content/lore.js"></script>
+<!-- CONTENT:END -->
+<script src="v1-tiles.js"></script>
+<script src="v1-actors.js"></script>
+<script src="v1-implant-art.js"></script>
+<script src="v1-cinema.js"></script>
+<script src="v1-cinema-pages.js"></script>
+<script src="audio.js"></script>
+<script src="npc-unlocks.js"></script>
+<script src="presentation.js"></script>
+<script src="panels.js"></script>
+<script src="interface-effects.js"></script>
+<script src="hacked-units.js"></script>
+<script src="enhancement-wheel.js"></script>
+<script src="body-illustration.js"></script>
+<script src="chip-rules.js"></script>
+<script src="compact-ui.js"></script>
+<script src="combat-effects.js"></script>
+<script src="boss-combat.js"></script>
+<script src="implant-combat.js"></script>
+<script src="game.js"></script>
+<script>
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol) && /\/pwa\//.test(location.pathname)) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>

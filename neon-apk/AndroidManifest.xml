@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dsh.neondepth" android:versionCode="106" android:versionName="1.0.0">
+    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="33" />
+    <application android:name=".NeonApplication" android:label="霓虹深潜" android:icon="@mipmap/icon" android:allowBackup="true" android:extractNativeLibs="true" android:theme="@style/AppTheme">
+        <activity android:name=".CompatibilityRestartActivity" android:exported="false"
+            android:process=":compat_restart" android:taskAffinity="" android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

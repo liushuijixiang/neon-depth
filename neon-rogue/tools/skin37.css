@@ -1,0 +1,40 @@
+/* SKIN_V37 · 去掉大色块：深色底 + 霓虹描边 */
+.cta{background:linear-gradient(var(--acc,#22e6ff),var(--acc,#22e6ff)) left top/12px 1px no-repeat,linear-gradient(var(--acc,#22e6ff),var(--acc,#22e6ff)) left top/1px 12px no-repeat,linear-gradient(var(--acc,#22e6ff),var(--acc,#22e6ff)) right bottom/12px 1px no-repeat,linear-gradient(var(--acc,#22e6ff),var(--acc,#22e6ff)) right bottom/1px 12px no-repeat,linear-gradient(90deg,color-mix(in srgb,var(--acc,#22e6ff) 10%,transparent),rgba(6,10,16,.72) 70%)!important;
+  border:1px solid color-mix(in srgb,var(--acc,#22e6ff) 42%,transparent)!important;border-radius:4px!important;color:color-mix(in srgb,var(--acc,#22e6ff) 65%,#fff)!important;font-weight:700;
+  text-shadow:0 0 8px color-mix(in srgb,var(--acc,#22e6ff) 65%,transparent)!important;box-shadow:0 0 16px color-mix(in srgb,var(--acc,#22e6ff) 14%,transparent),inset 0 0 14px color-mix(in srgb,var(--acc,#22e6ff) 7%,transparent)!important}
+.cta:disabled{filter:grayscale(.7) brightness(.6)}
+.m3-cta{color:#eaf6ff;background:linear-gradient(var(--mc),var(--mc)) left top/2px 100% no-repeat,linear-gradient(90deg,color-mix(in srgb,var(--mc) 12%,transparent),rgba(6,10,16,.78) 75%);border:1px solid color-mix(in srgb,var(--mc) 40%,transparent);border-radius:4px;box-shadow:0 0 22px color-mix(in srgb,var(--mc) 16%,transparent),inset 0 0 20px color-mix(in srgb,var(--mc) 6%,transparent)}
+.m3-cta span{color:#fff;text-shadow:0 0 12px color-mix(in srgb,var(--mc) 80%,transparent)}.m3-cta small{color:color-mix(in srgb,var(--mc) 60%,#9fb6c4);opacity:1}
+.m3-cta i svg{stroke:var(--mc)!important;filter:drop-shadow(0 0 4px var(--mc))}
+.m3-cta::after{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--mc) 35%,transparent),transparent);width:40%;animation:m3sweep 4s linear infinite}
+@keyframes m3sweep{from{transform:translateX(-120%)}to{transform:translateX(320%)}}
+.m3-cta::before{content:"";position:absolute;right:0;top:0;width:12px;height:12px;border-top:1px solid var(--mc);border-right:1px solid var(--mc)}
+.tab.on{background:rgba(10,16,24,.6)!important;box-shadow:inset 0 -2px 0 var(--acc,#22e6ff),0 0 10px color-mix(in srgb,var(--acc,#22e6ff) 20%,transparent)!important}
+/* 卡片：降低底色饱和，只留描边与角标 */
+.m3-tile,.m3-mode,.m3-pcard{background:linear-gradient(150deg,color-mix(in srgb,var(--tc) 6%,rgba(8,13,20,.86)),rgba(5,9,15,.9))!important}
+.m3-tile::after{opacity:.45}
+.m3-bar{background:linear-gradient(110deg,rgba(255,122,69,.08),rgba(8,13,20,.86) 60%)!important}
+.m3-quote{background:linear-gradient(100deg,rgba(255,122,69,.06),rgba(8,13,20,.6))}
+/* 挑战树：右上角闪烁三角 */
+.m3-mode{position:relative;overflow:hidden}
+.m3-chaltri{position:absolute;right:8px;top:6px;display:flex;flex-direction:column;align-items:center;gap:0;padding:4px;color:#ff365c;z-index:2}
+.m3-chaltri svg{width:26px;height:24px;fill:rgba(40,6,12,.6);stroke:#ff365c;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 0 5px #ff365c);animation:m3warn 1.4s steps(2) infinite}
+.m3-chaltri svg .ex{stroke-linecap:round}
+.m3-chaltri b{position:absolute;top:10px;font-size:9px;color:#fff;font-weight:900}
+.m3-chaltri small{font-size:8px;letter-spacing:.06em;color:#ff7a8a;margin-top:1px}
+.m3-chaltri:has(b:empty) svg{animation-duration:2.4s}
+@keyframes m3warn{50%{opacity:.35}}
+.m3-mode .ice{color:#ff365c!important;border-color:rgba(255,54,92,.5)!important}
+/* 挑战越多，深潜卡越「入侵」 */
+.m3-mode.heat1{--tc:#9b5cff!important}
+.m3-mode.heat2{--tc:#ff2fa8!important}.m3-mode.heat2 .tx b{animation:m3jit 2.6s steps(1) infinite}
+.m3-mode.heat3,.m3-mode.heat4{--tc:#ff365c!important}.m3-mode.heat3 .tx b,.m3-mode.heat4 .tx b{animation:m3jit 1.2s steps(1) infinite}
+.m3-mode.heat2::before,.m3-mode.heat3::before,.m3-mode.heat4::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,54,92,.06) 0 1px,transparent 1px 3px);animation:m3noise .25s steps(3) infinite}
+.m3-mode.heat3 .art,.m3-mode.heat4 .art{animation:m3jit 1.6s steps(1) infinite;filter:drop-shadow(0 0 6px #ff365c) hue-rotate(0deg)}
+.m3-crack{position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,transparent 47%,rgba(255,54,92,.55) 47.4%,transparent 48%) 0 0/100% 100%,linear-gradient(64deg,transparent 70%,rgba(255,54,92,.4) 70.3%,transparent 70.8%) 0 0/100% 100%}
+.m3-bw{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-6deg);font-style:normal;font-size:26px;font-weight:900;letter-spacing:.3em;color:rgba(255,54,92,.16);pointer-events:none;animation:m3warn 3s steps(2) infinite}
+.m3-mode.heat4{box-shadow:0 0 22px rgba(255,54,92,.35),inset 0 0 22px rgba(255,54,92,.15)!important;animation:m3pulse 2s ease-in-out infinite}
+@keyframes m3jit{0%,88%,100%{transform:none}90%{transform:translate(2px,-1px) skewX(-6deg)}94%{transform:translate(-2px,1px)}}
+@keyframes m3noise{33%{background-position:0 1px}66%{background-position:0 2px}}
+@keyframes m3pulse{50%{box-shadow:0 0 30px rgba(255,54,92,.5),inset 0 0 26px rgba(255,54,92,.2)}}
+@media(prefers-reduced-motion:reduce){.m3-chaltri svg,.m3-mode .tx b,.m3-mode .art,.m3-mode::before,.m3-bw,.m3-mode.heat4{animation:none!important}}

@@ -1,0 +1,24 @@
+# Local dependencies, build and test outputs
+**/node_modules/
+**/__pycache__/
+*.py[cod]
+/work/
+/outputs/
+/neon-apk/delivery/
+/neon-rogue/work/
+/neon-rogue/output/
+/neon-rogue/.playwright-cli/
+
+# Signing material and installed packages
+*.apk
+*.aab
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.key
+*.pem
+.env
+.env.*
+**/signing-password.txt
+*.log

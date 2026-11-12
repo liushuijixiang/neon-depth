@@ -1,0 +1,26 @@
+const { chromium } = require('playwright'), path = require('path'); const ROOT = path.resolve(__dirname, '..');
+(async () => {
+  const b = await chromium.launch({ args: ['--no-sandbox'] }); const page = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1.5 });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.addInitScript(() => { localStorage.setItem('neon-depth-mute', '1'); localStorage.setItem('neon-depth-story', JSON.stringify({ scenes: { intro: 1 }, dreams: { bd_hound: 1 } })); });
+  await page.goto('file://' + path.join(ROOT, 'dist.debug.html'));
+  const shot = async (n, fn) => { await page.evaluate(fn); await page.waitForTimeout(450); await page.screenshot({ path: path.join(ROOT, 'shots', 'v19-' + n + '.png') }); };
+  const close = () => page.evaluate(() => { const N = window.__neon, G = N.G; N.test.hideOverlay(); G.paused = false; G.modal = null; G.pendingBoard = null; G.storyQueue = []; G.swapQueue = []; if (N.p) N.p.pending = 0; });
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'assault'; N.startGame(); }); await close();
+  await page.evaluate(() => { const N = window.__neon, G = N.G; ['hand_red', 'body_purple', 'eye_blue', 'spine_orange', 'legL_red', 'hand_orange', 'eye_red', 'body_red', 'leg_gray'].forEach(id => { const m = N.mods.find(x => x.id === id); if (m) N.applyMod(m); }); N.addChipObject(N.makeChip('power', 'blue')); for (let i = 0; i < 6; i++) N.addChipObject(N.makeChip('crit', 'gray')); const k = Object.keys(G.inst)[0]; G.inst[k].dur = 2; }); await close();
+  await shot('hud', () => window.__neon.updateHUD());
+  await shot('bag', () => window.__neon.test.v18.openBag('gear')); await close();
+  await shot('bagfull', () => { const N = window.__neon, G = N.G; const m = N.mods.find(x => x.slot === 'hand' && x.quality === 'purple' && !x.cls && G.modBag.indexOf(x.id) < 0); const it = { x: N.p.x, y: N.p.y, mod: m, seed: 0 }; G.items.push(it); while (N.test.v18.bagLoad() + 2 <= N.test.v18.bagCap()) { const f = N.mods.find(x => !x.cls && !x.relic && !x.dropOnly && x.quality === 'gray' && G.modBag.indexOf(x.id) < 0); G.modBag.push(f.id); } N.test.v18.fullPickupScreen(it); }); await close();
+  await shot('gun', () => { window.__neon.G.energy = 9; window.__neon.test.ui.openGun ? window.__neon.test.ui.openGun() : null; });
+  await close();
+  await shot('cyber', () => { window.__neon.test.ui.openCyber(); }); await close();
+  await shot('event', () => { const N = window.__neon; N.test.v18.openEvent({ type: 'event', x: 0, y: 0, data: { ev: window.NEON.neta.events[9].id } }); }); await close();
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'engineer'; N.startGame(); }); await close();
+  await shot('build', () => { const N = window.__neon, G = N.G; G.scrap = 60; G.mechBuilt = true; window.__neon.test.ui.openBuild ? window.__neon.test.ui.openBuild() : null; }); await close();
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'ghost'; N.startGame(); }); await close();
+  await shot('ghost', () => { const N = window.__neon, G = N.G; G.instab = 45; const s = window.NEON.monsters.find(m => m.ai === 'chase'); const e = N.test.spawnEnemy(s, N.p.x + 2, N.p.y, 3); G.map[e.y][e.x] = 0; G.enemies.push(e); N.computeFOV(); N.updateHUD(); });
+  await page.evaluate(() => { const V = window.__neon.test.v18; V.dreamBegin(V.DREAMS.find(d => d.id === 'bd_hound')); }); await page.waitForTimeout(300); await close();
+  await shot('dream', () => { window.__neon.updateHUD(); });
+  await shot('end', () => { const N = window.__neon; N.G.state = 'over'; N.test.ui.endScreen ? N.test.ui.endScreen(false, 1234, false) : null; });
+  console.log('errors', JSON.stringify(errs)); await b.close();
+})();

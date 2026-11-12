@@ -1,0 +1,35 @@
+const { chromium } = require('playwright'), path = require('path'); const ROOT = path.resolve(__dirname, '..');
+(async () => {
+  const b = await chromium.launch({ args: ['--no-sandbox'] }); const page = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1.5 });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.addInitScript(() => { localStorage.setItem('neon-depth-mute', '1'); localStorage.removeItem('neon-depth-run'); const ch = {}; for (let i = 1; i <= 13; i++) ch['ch' + String(i).padStart(2, '0')] = 1; localStorage.setItem('neon-depth-story', JSON.stringify({ scenes: { intro: 1, corp_first_accept: 1, corp_first_done: 1, corp_desk_caught: 1, corp_cage_open: 1 }, chapters: ch, wins: 1 })); });
+  await page.goto('file://' + path.join(ROOT, 'dist.debug.html')); await page.waitForTimeout(400);
+  const shot = async (n) => { await page.waitForTimeout(450); await page.screenshot({ path: path.join(ROOT, 'shots', 'v34-' + n + '.png') }); };
+  const close = () => page.evaluate(() => { const N = window.__neon, G = N.G; N.test.hideOverlay(); G.paused = false; G.busy = false; G.modal = null; G.storyQueue = []; G.pendingBoard = null; });
+  await shot('menu');
+  const op = async (job, rival, corp, name, after) => {
+    await page.evaluate(([job, rival, corp]) => { const N = window.__neon, G = N.G; G.classId = 'assault'; G.trainPending = false; N.startGame(); N.test.hideOverlay(); G.modal = null; G.adaptBonus = 999; G.depth = 2; G.corpZone = {}; G.forceCorp = true; G.forceJob = job; N.startFloor(); G.forceCorp = false; N.test.hideOverlay(); G.modal = null; G.pendingBoard = null; const s = G.sites.find(x => x.type === 'corp'); s.data.rival = rival; s.data.corp = corp; s.data.job = job; N.test.corp.openCorp(s); }, [job, rival, corp]);
+    if (name === 'desk') await shot('offer');
+    await page.evaluate(() => { const N = window.__neon, G = N.G; document.querySelector('#corpYes').click(); N.test.hideOverlay(); G.modal = null; G.depth = 3; N.startFloor(); N.test.hideOverlay(); G.paused = false; G.modal = null; G.storyQueue = []; });
+    if (after) await page.evaluate(after);
+    await page.evaluate(() => { const N = window.__neon; N.computeFOV(); N.updateHUD(); });
+    await shot(name);
+  };
+  await op('desk', 'dome', 'kharon', 'desk', () => { const N = window.__neon, G = N.G; const c = G.cams[1] || G.cams[0]; N.p.x = c.x + 1; N.p.y = c.y + 4; while (G.map[N.p.y][N.p.x]) N.p.y--; G.turn = 4 - c.phase; G.enemies.forEach(e => { e.stun = 99; }); });
+  await op('sabotage', 'kharon', 'mobius', 'kharon', () => { const N = window.__neon, G = N.G; const f = G.cfence[0]; N.p.x = f.x; N.p.y = f.y - 2; if (G.map[N.p.y][N.p.x]) N.p.y = f.y + 2; G.cmines.forEach(m => { G.seen[m.y][m.x] = 1; }); });
+  await op('cage', 'mobius', 'dome', 'cage', () => { const N = window.__neon, G = N.G; const s = G.sites.find(x => x.type === 'cage'); N.test.corp.releaseSubject(s.x, s.y, null); N.p.x = s.x; N.p.y = s.y + 3; if (G.map[N.p.y][N.p.x]) N.p.y = s.y + 1; });
+  await page.evaluate(() => { const N = window.__neon, G = N.G; N.test.ui.openCyber(); });
+  await shot('trial');
+  await close();
+  await page.evaluate(() => { const N = window.__neon, G = N.G; N.test.b16.enterB16(); N.test.hideOverlay(); G.modal = null; G.paused = false; G.busy = false; N.p.x = 22; N.p.y = 15; N.computeFOV(); N.updateHUD(); });
+  await shot('b16');
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.b16.phase = 'camp'; N.test.b16.b16Campaign(1); });
+  await page.waitForTimeout(300); await shot('campscene');
+  await close(); await page.evaluate(() => { const N = window.__neon, G = N.G; const b = G.enemies.find(e => e.b16Boss); N.p.x = b.x - 1; N.p.y = b.y + 2; if (G.map[N.p.y][N.p.x]) N.p.y = b.y + 1; N.computeFOV(); N.updateHUD(); });
+  await shot('camp');
+  await page.evaluate(() => { const N = window.__neon, G = N.G; N.test.hideOverlay(); G.state = 'menu'; N.test.ui.menuScreen('ember'); document.querySelector('[data-mnact="ach"]').click(); });
+  await shot('ach');
+  await page.evaluate(() => { const N = window.__neon; N.test.ui.menuScreen('ember'); document.querySelector('[data-mnact="bar"]').click(); });
+  await shot('bar');
+  console.log('errors', JSON.stringify(errs)); await b.close();
+})();

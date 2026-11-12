@@ -1,0 +1,1381 @@
+{
+ "classes": [
+  {
+   "id": "assault",
+   "name": "突袭者",
+   "desc": "多功能枪械，能量装填，特种弹",
+   "kit": [
+    "atk_servo"
+   ]
+  },
+  {
+   "id": "engineer",
+   "name": "工程师",
+   "desc": "初始携带相位墙，可用工程台建造",
+   "kit": [
+    "act_wall",
+    "sv_chassis"
+   ]
+  },
+  {
+   "id": "ghost",
+   "name": "幽灵",
+   "desc": "临界四形态 · 先手 · 刀尖舔血",
+   "kit": [
+    "tc_ghost"
+   ]
+  }
+ ],
+ "bosses": [
+  {
+   "id": "bl_hound",
+   "name": "裂齿猎犬",
+   "tier": 1,
+   "desc": "地下斗犬场逃出的改装猎犬，液压颚能咬穿装甲",
+   "intro": "铁链断了，它闻到血",
+   "tactic": "裂齿追猎"
+  },
+  {
+   "id": "bl_hive",
+   "name": "蜂巢母体",
+   "tier": 1,
+   "desc": "失控的生物培养舱，至今仍在批量产卵",
+   "intro": "天花板开始往下掉卵",
+   "tactic": "活体增殖工厂"
+  },
+  {
+   "id": "bl_warden",
+   "name": "锈甲守望",
+   "tier": 1,
+   "desc": "旧港反应堆的守门机，锈甲下是滚烫的液压核心",
+   "intro": "它把盾举过头顶",
+   "tactic": "液压反应堆"
+  },
+  {
+   "id": "bl_lance",
+   "name": "棱镜枪骑",
+   "tier": 2,
+   "desc": "企业退役的棱镜火控骑兵，从不在原地开第二枪",
+   "intro": "红点落在你胸口",
+   "tactic": "棱镜游骑兵"
+  },
+  {
+   "id": "bl_mine",
+   "name": "磁雷蛛",
+   "tier": 2,
+   "desc": "八足布雷机，把整层走廊织成一张磁网",
+   "intro": "脚下亮起三颗红点",
+   "tactic": "磁网过载"
+  },
+  {
+   "id": "bl_mirror",
+   "name": "镜渊",
+   "tier": 2,
+   "desc": "寄生在镜面后的刺杀协议，每块玻璃都是它的门",
+   "intro": "镜子里有六个你",
+   "tactic": "千面折光矩阵"
+  },
+  {
+   "id": "bh_eye",
+   "name": "终焉之眼",
+   "tier": 3,
+   "desc": "深渊底部的神经监视核心，被它看见即是灼烧",
+   "intro": "它睁开眼，整层开始融化",
+   "tactic": "终焉神经灼照"
+  },
+  {
+   "id": "bh_hive",
+   "name": "万巢之母",
+   "tier": 3,
+   "desc": "把整层墙体改造成神经网络的母巢主机",
+   "intro": "墙里爬出第一批孩子",
+   "tactic": "递归母巢网络"
+  },
+  {
+   "id": "bh_phase",
+   "name": "三相之骸",
+   "tier": 3,
+   "desc": "困在三个时间相位间的残骸，过去会追上你",
+   "intro": "它把自己撕成三个阶段",
+   "tactic": "三相时间裂隙"
+  }
+ ],
+ "monsters": [
+  {
+   "id": "drone",
+   "name": "巡逻机",
+   "ai": "chase",
+   "desc": "企业外包的廉价巡逻机，锁定即直扑"
+  },
+  {
+   "id": "pulse_turret",
+   "name": "脉冲炮塔",
+   "ai": "turret",
+   "desc": "钉在墙上的脉冲哨戒炮"
+  },
+  {
+   "id": "blade_runner",
+   "name": "刃轮",
+   "ai": "charger",
+   "desc": "一次滑铲两格，刀锋先行"
+  },
+  {
+   "id": "explode_bug",
+   "name": "自爆蜂",
+   "ai": "exploder",
+   "desc": "贴着你就烧尽自己的核心"
+  },
+  {
+   "id": "fission",
+   "name": "裂变体",
+   "ai": "chase",
+   "desc": "裂变核心极不稳定，击碎即一分为二"
+  },
+  {
+   "id": "data_hound",
+   "name": "数据猎犬",
+   "ai": "chase",
+   "desc": "嗅到数据血味就狂奔"
+  },
+  {
+   "id": "hive_mother",
+   "name": "孵巢母体",
+   "ai": "summoner",
+   "desc": "从腹腔孵出更小的麻烦"
+  },
+  {
+   "id": "bulkhead",
+   "name": "壁垒机兵",
+   "ai": "tank",
+   "desc": "装甲厚重，动作永远慢半拍"
+  },
+  {
+   "id": "med_drone",
+   "name": "修补无人机",
+   "ai": "healer",
+   "desc": "边打边修补同伴的伤口"
+  },
+  {
+   "id": "prism_sniper",
+   "name": "狙击棱镜",
+   "ai": "turret",
+   "desc": "远处校准，然后一束穿甲"
+  },
+  {
+   "id": "rail_ram",
+   "name": "熔核冲角",
+   "ai": "charger",
+   "desc": "过载核心，撞上来一起烧"
+  },
+  {
+   "id": "frost_hound",
+   "name": "霜噬犬",
+   "ai": "chase",
+   "desc": "从冷冻仓冰层里扑出的猎犬"
+  },
+  {
+   "id": "arc_turret",
+   "name": "电弧炮台",
+   "ai": "turret",
+   "desc": "过载电弧，射程极远"
+  },
+  {
+   "id": "splitter",
+   "name": "分裂球",
+   "ai": "chase",
+   "desc": "打碎会裂成两个"
+  },
+  {
+   "id": "bulwark",
+   "name": "护盾机兵",
+   "ai": "tank",
+   "desc": "重甲护盾机兵，两回合才挪一步"
+  },
+  {
+   "id": "medic_drone",
+   "name": "医疗无人机",
+   "ai": "healer",
+   "desc": "给同伴续命的飞行器"
+  },
+  {
+   "id": "bomber_drone",
+   "name": "轰炸无人机",
+   "ai": "exploder",
+   "desc": "贴身自爆的飞行炸弹"
+  },
+  {
+   "id": "void_stalker",
+   "name": "虚空猎手",
+   "ai": "charger",
+   "desc": "虚空里冲出的猎手"
+  },
+  {
+   "id": "mirror_knight",
+   "name": "镜甲骑士",
+   "ai": "tank",
+   "desc": "镜面装甲，行动迟缓"
+  },
+  {
+   "id": "spawn_tower",
+   "name": "孵化塔",
+   "ai": "summoner",
+   "desc": "不断吐出虚空幼虫"
+  },
+  {
+   "id": "void_eye",
+   "name": "虚空之眼",
+   "ai": "turret",
+   "desc": "凝视即灼烧的浮游炮"
+  },
+  {
+   "id": "colossus",
+   "name": "虚空巨像",
+   "ai": "chase",
+   "desc": "倒下时也会炸开"
+  },
+  {
+   "id": "swarmling",
+   "name": "虚空幼虫",
+   "ai": "chase",
+   "desc": "数量就是它的武器"
+  },
+  {
+   "id": "s2_frost_mite",
+   "name": "霜螨",
+   "ai": "chase",
+   "desc": "冰层里成群爬行"
+  },
+  {
+   "id": "s2_arc_pylon",
+   "name": "电弧塔",
+   "ai": "turret",
+   "desc": "过载前会嘶嘶作响"
+  },
+  {
+   "id": "s2_ice_ram",
+   "name": "冰壳撞兽",
+   "ai": "charger",
+   "desc": "冰壳覆体，一低头便是直线冲撞"
+  },
+  {
+   "id": "s2_core_husk",
+   "name": "数据残躯",
+   "ai": "tank",
+   "desc": "机柜里爬出的空壳"
+  },
+  {
+   "id": "s2_packet_ghost",
+   "name": "幽灵包",
+   "ai": "chase",
+   "desc": "已死协议的残影"
+  },
+  {
+   "id": "s2_volt_sac",
+   "name": "电浆囊",
+   "ai": "exploder",
+   "desc": "碰一下就整片跳闸"
+  },
+  {
+   "id": "s2_ruin_cantor",
+   "name": "废墟唱诗",
+   "ai": "summoner",
+   "desc": "用损坏圣歌唤醒残骸"
+  },
+  {
+   "id": "s2_repair_drone",
+   "name": "修复无人机",
+   "ai": "healer",
+   "desc": "焊枪会给同伴续命"
+  },
+  {
+   "id": "s3_void_mite",
+   "name": "虚空螨",
+   "ai": "chase",
+   "desc": "虚空缝隙里的群虫"
+  },
+  {
+   "id": "s3_mirror_shade",
+   "name": "镜界残影",
+   "ai": "turret",
+   "desc": "照出你的下一个死法"
+  },
+  {
+   "id": "s3_rift_charger",
+   "name": "裂隙突袭",
+   "ai": "charger",
+   "desc": "沿裂隙直线贯穿而来"
+  },
+  {
+   "id": "s3_corrupt_bulwark",
+   "name": "腐化壁垒",
+   "ai": "tank",
+   "desc": "腐化装甲裹着旧神"
+  },
+  {
+   "id": "s3_void_bloomer",
+   "name": "虚空爆蕊",
+   "ai": "exploder",
+   "desc": "靠近就准备同归于尽"
+  },
+  {
+   "id": "s3_fracture_warden",
+   "name": "崩界守卫",
+   "ai": "summoner",
+   "desc": "镇守崩塌边界，不断召出裂隙残片"
+  },
+  {
+   "id": "s3_hollow_choir",
+   "name": "空洞合唱",
+   "ai": "healer",
+   "desc": "为虚空缝补伤口"
+  },
+  {
+   "id": "s3_oblivion_hound",
+   "name": "湮灭猎犬",
+   "ai": "chase",
+   "desc": "嗅着数据残响追猎"
+  }
+ ],
+ "mods": [
+  {
+   "id": "triple_shot",
+   "name": "三联脉冲",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "脉冲射击额外命中 2 个目标",
+   "cls": "assault",
+   "active": "脉冲射击",
+   "fromBoss": null
+  },
+  {
+   "id": "nova_wide",
+   "name": "环爆扩容",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "冲击波范围 +1，伤害 +50%",
+   "cls": "assault",
+   "active": "环爆",
+   "fromBoss": null
+  },
+  {
+   "id": "drone_swarm",
+   "name": "蜂群协议",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "僚机 +1，僚机伤害 +50%",
+   "cls": "engineer",
+   "active": "蜂群支援",
+   "fromBoss": null
+  },
+  {
+   "id": "turret_net",
+   "name": "炮台网络",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "炮台上限 +1，射速翻倍",
+   "cls": "engineer",
+   "active": "部署炮台",
+   "fromBoss": null
+  },
+  {
+   "id": "wall_blast",
+   "name": "相位炸药",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "展开相位墙，阻挡并震伤周围敌人",
+   "cls": "engineer",
+   "active": "相位墙",
+   "fromBoss": null
+  },
+  {
+   "id": "stealth_heal",
+   "name": "迷彩修复",
+   "slot": "body",
+   "quality": "blue",
+   "desc": "隐身时回复 8 HP，隐身持续 +2 回合",
+   "cls": "ghost",
+   "active": "迷彩修复",
+   "fromBoss": null
+  },
+  {
+   "id": "grow_giant",
+   "name": "巨人核心",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "巨化额外 +6 攻击",
+   "cls": "ghost",
+   "active": "巨化",
+   "fromBoss": null
+  },
+  {
+   "id": "blink_charge",
+   "name": "电荷残影",
+   "slot": "leg",
+   "quality": "blue",
+   "desc": "冲刺落点引爆冲击波",
+   "cls": "assault",
+   "active": "电荷突进",
+   "fromBoss": null
+  },
+  {
+   "id": "vampire",
+   "name": "血泵",
+   "slot": "body",
+   "quality": "red",
+   "desc": "吸血 +10%",
+   "cls": null,
+   "active": "血爆",
+   "fromBoss": null
+  },
+  {
+   "id": "thorns_plate",
+   "name": "反射装甲",
+   "slot": "body",
+   "quality": "blue",
+   "desc": "反伤 +4",
+   "cls": null,
+   "active": "反射力场",
+   "fromBoss": null
+  },
+  {
+   "id": "cooldown_core",
+   "name": "冷却核心",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "所有主动技能冷却 -1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "hp_core",
+   "name": "生命核心",
+   "slot": "body",
+   "quality": "orange",
+   "desc": "生命上限 +15",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "crit_chip",
+   "name": "暴击义眼",
+   "slot": "eye",
+   "quality": "purple",
+   "desc": "暴击 +10%，暴击伤害 +50%",
+   "cls": null,
+   "active": "弱点扫描",
+   "fromBoss": null
+  },
+  {
+   "id": "optic",
+   "name": "多光谱眼",
+   "slot": "eye",
+   "quality": "blue",
+   "desc": "视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_gray",
+   "name": "基础义眼",
+   "slot": "eye",
+   "quality": "gray",
+   "desc": "生命 +2",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_green",
+   "name": "广角义眼",
+   "slot": "eye",
+   "quality": "green",
+   "desc": "视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_blue",
+   "name": "多光谱眼 II",
+   "slot": "eye",
+   "quality": "blue",
+   "desc": "视野 +1，暴击 +3%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_purple",
+   "name": "战术目镜",
+   "slot": "eye",
+   "quality": "purple",
+   "desc": "暴击 +6%，视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_orange",
+   "name": "猎杀视觉",
+   "slot": "eye",
+   "quality": "orange",
+   "desc": "暴击 +8%，视野 +1，残血伤害 +20%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "eye_red",
+   "name": "神谕之眼",
+   "slot": "eye",
+   "quality": "red",
+   "desc": "暴击 +12%，视野 +2，残血伤害 +30%",
+   "cls": null,
+   "active": "审判射线",
+   "fromBoss": null
+  },
+  {
+   "id": "hand_gray",
+   "name": "工业义手",
+   "slot": "hand",
+   "quality": "gray",
+   "desc": "攻击 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "hand_green",
+   "name": "液压义手",
+   "slot": "hand",
+   "quality": "green",
+   "desc": "攻击 +1，生命 +4",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "hand_blue",
+   "name": "弹道义手",
+   "slot": "hand",
+   "quality": "blue",
+   "desc": "攻击 +2，暴击 +3%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "hand_purple",
+   "name": "处决义手",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +2，残血伤害 +20%",
+   "cls": null,
+   "active": "裂解斩",
+   "fromBoss": null
+  },
+  {
+   "id": "hand_orange",
+   "name": "屠戮义手",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "攻击 +3，吸血 +10%",
+   "cls": null,
+   "active": "裂解斩",
+   "fromBoss": null
+  },
+  {
+   "id": "hand_red",
+   "name": "终焉义手",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "攻击 +4，吸血 +10%，残血伤害 +30%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_gray",
+   "name": "皮下装甲",
+   "slot": "body",
+   "quality": "gray",
+   "desc": "防御 +1，生命 +2",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_green",
+   "name": "强化皮肤",
+   "slot": "body",
+   "quality": "green",
+   "desc": "防御 +2，生命 +5",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_blue",
+   "name": "反射装甲 II",
+   "slot": "body",
+   "quality": "blue",
+   "desc": "防御 +2，生命 +8，反伤 +4",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_purple",
+   "name": "血泵 II",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "生命 +10，吸血 +12%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_orange",
+   "name": "红质核心",
+   "slot": "body",
+   "quality": "orange",
+   "desc": "生命 +15，攻击 +1，残血伤害 +15%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "body_red",
+   "name": "不朽躯壳",
+   "slot": "body",
+   "quality": "red",
+   "desc": "生命 +20，防御 +3，反伤 +8",
+   "cls": null,
+   "active": "力场",
+   "fromBoss": null
+  },
+  {
+   "id": "spine_gray",
+   "name": "神经接口",
+   "slot": "spine",
+   "quality": "gray",
+   "desc": "生命 +2",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "spine_green",
+   "name": "冷却核心 II",
+   "slot": "spine",
+   "quality": "green",
+   "desc": "暴击 +2%，生命 +3",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "spine_blue",
+   "name": "神经主干",
+   "slot": "spine",
+   "quality": "blue",
+   "desc": "暴击 +5%，闪避 +2%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "spine_purple",
+   "name": "超频脊椎",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "暴击 +8%，攻击 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "spine_orange",
+   "name": "猎杀脊柱",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "攻击 +2，暴击 +5%",
+   "cls": null,
+   "active": "过载脉冲",
+   "fromBoss": null
+  },
+  {
+   "id": "spine_red",
+   "name": "量子脊柱",
+   "slot": "spine",
+   "quality": "red",
+   "desc": "攻击 +2，暴击 +10%，吸血 +8%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_gray",
+   "name": "义腿·弹簧件",
+   "slot": "leg",
+   "quality": "gray",
+   "desc": "生命 +2，闪避 +2%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_green",
+   "name": "义腿·弹簧义腿",
+   "slot": "leg",
+   "quality": "green",
+   "desc": "闪避 +4%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_blue",
+   "name": "义腿·液压义腿",
+   "slot": "leg",
+   "quality": "blue",
+   "desc": "生命 +5，闪避 +4%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_purple",
+   "name": "义腿·疾风腿",
+   "slot": "leg",
+   "quality": "purple",
+   "desc": "闪避 +6%，暴击 +3%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_orange",
+   "name": "义腿·相位腿",
+   "slot": "leg",
+   "quality": "orange",
+   "desc": "闪避 +8%，视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "legL_red",
+   "name": "义腿·瞬影腿",
+   "slot": "leg",
+   "quality": "red",
+   "desc": "闪避 +10%，暴击 +6%",
+   "cls": null,
+   "active": "相位突进",
+   "fromBoss": null
+  },
+  {
+   "id": "claw_hound",
+   "name": "猎犬颚骨",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "攻击 +2，吸血 +12%，残血伤害 +20%",
+   "cls": null,
+   "active": null,
+   "fromBoss": "bl_hound"
+  },
+  {
+   "id": "hive_spine",
+   "name": "蜂巢神经索",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "生命 +12，反伤 +6",
+   "cls": null,
+   "active": null,
+   "fromBoss": "bl_hive"
+  },
+  {
+   "id": "prism_eye",
+   "name": "棱镜镜片",
+   "slot": "eye",
+   "quality": "red",
+   "desc": "暴击 +12%，视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": "bl_lance"
+  },
+  {
+   "id": "mirror_body",
+   "name": "镜渊皮膜",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "闪避 +6%，暴击 +6%",
+   "cls": null,
+   "active": null,
+   "fromBoss": "bl_mirror"
+  },
+  {
+   "id": "ach_reaver",
+   "name": "成就·屠戮者义手",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "攻击 +3，吸血 +10%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "ach_crown",
+   "name": "成就·深渊冠冕",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "生命 +12，防御 +2",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "ach_swarm",
+   "name": "成就·蜂群复眼",
+   "slot": "eye",
+   "quality": "purple",
+   "desc": "暴击 +8%，视野 +1",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "ach_warden",
+   "name": "成就·守卫装甲",
+   "slot": "body",
+   "quality": "orange",
+   "desc": "防御 +2，反伤 +10",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "assault_spine_p",
+   "name": "脉冲肩甲",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "攻击 +2，主动：脉冲齐射",
+   "cls": null,
+   "active": "脉冲齐射",
+   "fromBoss": null
+  },
+  {
+   "id": "assault_hand_p",
+   "name": "过载护手",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +3，暴击 +6%",
+   "cls": null,
+   "active": "过载连射",
+   "fromBoss": null
+  },
+  {
+   "id": "assault_leg_p",
+   "name": "推进腿",
+   "slot": "leg",
+   "quality": "purple",
+   "desc": "闪避 +6%，主动：电荷突进",
+   "cls": null,
+   "active": "电荷突进",
+   "fromBoss": null
+  },
+  {
+   "id": "assault_spine_r",
+   "name": "脉冲肩甲 II",
+   "slot": "spine",
+   "quality": "red",
+   "desc": "攻击 +3，主动：脉冲齐射",
+   "cls": null,
+   "active": "脉冲齐射",
+   "fromBoss": null
+  },
+  {
+   "id": "assault_hand_r",
+   "name": "过载护手 II",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "攻击 +4，暴击 +9%",
+   "cls": null,
+   "active": "过载连射",
+   "fromBoss": null
+  },
+  {
+   "id": "assault_leg_r",
+   "name": "推进腿 II",
+   "slot": "leg",
+   "quality": "red",
+   "desc": "闪避 +9%，主动：电荷突进",
+   "cls": null,
+   "active": "电荷突进",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_body_p",
+   "name": "壁垒躯干",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "生命 +12，防御 +2",
+   "cls": null,
+   "active": "壁垒力场",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_spine_p",
+   "name": "再生脊椎",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "提升生命与吸血；主动：回复生命并短暂隐身",
+   "cls": null,
+   "active": "再生协议",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_hand_p",
+   "name": "铁壁护手",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "防御 +2，反伤 +6",
+   "cls": null,
+   "active": "反射力场",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_body_r",
+   "name": "壁垒躯干 II",
+   "slot": "body",
+   "quality": "red",
+   "desc": "生命 +18，防御 +3",
+   "cls": null,
+   "active": "壁垒力场",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_spine_r",
+   "name": "再生脊椎 II",
+   "slot": "spine",
+   "quality": "red",
+   "desc": "提升生命与吸血；主动：回复生命并短暂隐身",
+   "cls": null,
+   "active": "再生协议",
+   "fromBoss": null
+  },
+  {
+   "id": "surv_hand_r",
+   "name": "铁壁护手 II",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "防御 +3，反伤 +9",
+   "cls": null,
+   "active": "反射力场",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_eye_p",
+   "name": "鹰眼",
+   "slot": "eye",
+   "quality": "purple",
+   "desc": "提升暴击与残血伤害；主动：标记视野内敌人",
+   "cls": null,
+   "active": "弱点扫描",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_hand_p",
+   "name": "处刑臂",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +2，残血伤害 +20%",
+   "cls": null,
+   "active": "处刑连斩",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_leg_p",
+   "name": "影腿",
+   "slot": "leg",
+   "quality": "purple",
+   "desc": "闪避 +5%，暴击 +5%",
+   "cls": null,
+   "active": "相位突进",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_eye_r",
+   "name": "鹰眼 II",
+   "slot": "eye",
+   "quality": "red",
+   "desc": "提升暴击与残血伤害；主动：标记视野内敌人",
+   "cls": null,
+   "active": "弱点扫描",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_hand_r",
+   "name": "处刑臂 II",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "攻击 +3，残血伤害 +30%",
+   "cls": null,
+   "active": "处刑连斩",
+   "fromBoss": null
+  },
+  {
+   "id": "hunt_leg_r",
+   "name": "影腿 II",
+   "slot": "leg",
+   "quality": "red",
+   "desc": "闪避 +8%，暴击 +8%",
+   "cls": null,
+   "active": "相位突进",
+   "fromBoss": null
+  },
+  {
+   "id": "sandevistan",
+   "name": "斯安威斯坦",
+   "slot": "spine",
+   "quality": "red",
+   "desc": "暴击 +8%，闪避 +6%；主动：时停移动",
+   "cls": null,
+   "active": "斯安威斯坦",
+   "fromBoss": null
+  },
+  {
+   "id": "mantis_blade",
+   "name": "螳螂刀",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +2，主动：螳螂连斩（流血）",
+   "cls": null,
+   "active": "螳螂连斩",
+   "fromBoss": null
+  },
+  {
+   "id": "monowire",
+   "name": "单分子线",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "暴击 +6%，主动：单分子鞭（范围流血）",
+   "cls": null,
+   "active": "单分子鞭",
+   "fromBoss": null
+  },
+  {
+   "id": "gorilla_arms",
+   "name": "猩猩手臂",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +3，生命 +5；主动：强力重击",
+   "cls": null,
+   "active": "强力重击",
+   "fromBoss": null
+  },
+  {
+   "id": "smart_link",
+   "name": "智能连接器",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "暴击 +8%；主动：智能锁定",
+   "cls": null,
+   "active": "智能锁定",
+   "fromBoss": null
+  },
+  {
+   "id": "projectile_launcher",
+   "name": "弹射发射器",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "攻击 +2；主动：微型导弹",
+   "cls": null,
+   "active": "微型导弹",
+   "fromBoss": null
+  },
+  {
+   "id": "emp_knuckles",
+   "name": "电磁指虎",
+   "slot": "hand",
+   "quality": "blue",
+   "desc": "攻击 +1，暴击 +4%；主动：电磁脉冲",
+   "cls": null,
+   "active": "电磁脉冲",
+   "fromBoss": null
+  },
+  {
+   "id": "thermal_blade",
+   "name": "热能刀",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +2；主动：热熔斩（流血）",
+   "cls": null,
+   "active": "热熔斩",
+   "fromBoss": null
+  },
+  {
+   "id": "ballistic_copro",
+   "name": "弹道协同处理器",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "攻击 +2，暴击 +5%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "wrist_missiles",
+   "name": "腕部导弹",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "攻击 +3；主动：导弹齐射",
+   "cls": null,
+   "active": "导弹齐射",
+   "fromBoss": null
+  },
+  {
+   "id": "shock_fist",
+   "name": "电击拳套",
+   "slot": "hand",
+   "quality": "green",
+   "desc": "攻击 +1；主动：电击",
+   "cls": null,
+   "active": "电击",
+   "fromBoss": null
+  },
+  {
+   "id": "katana",
+   "name": "三式·破晓",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "多段招式：三式攻击范围与形态各异，终式对残血增伤",
+   "cls": null,
+   "active": "三连斩",
+   "fromBoss": null
+  },
+  {
+   "id": "chainsaw",
+   "name": "链锯·回旋",
+   "slot": "hand",
+   "quality": "orange",
+   "desc": "蓄力最多 3 层，群体敌人越多伤害越高",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "iaido",
+   "name": "拔刀·居合",
+   "slot": "hand",
+   "quality": "red",
+   "desc": "蓄力越久伤害越高，直刺 3 格，对残血敌人重创",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "blood_edge",
+   "name": "血刃",
+   "slot": "hand",
+   "quality": "purple",
+   "desc": "横扫并吸血，伤害转化为生命与护盾",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "subdermal_armor",
+   "name": "皮下装甲",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "防御 +3，生命 +10",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "biomonitor",
+   "name": "生物监测",
+   "slot": "body",
+   "quality": "orange",
+   "desc": "生命 +8；主动：应急修复",
+   "cls": null,
+   "active": "应急修复",
+   "fromBoss": null
+  },
+  {
+   "id": "second_heart",
+   "name": "第二心脏",
+   "slot": "body",
+   "quality": "red",
+   "desc": "生命 +20，防御 +2；主动：心脏重启",
+   "cls": null,
+   "active": "心脏重启",
+   "fromBoss": null
+  },
+  {
+   "id": "blood_pump",
+   "name": "血液泵",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "吸血 +8%；主动：血液灌注",
+   "cls": null,
+   "active": "血液灌注",
+   "fromBoss": null
+  },
+  {
+   "id": "optical_camo",
+   "name": "光学迷彩",
+   "slot": "body",
+   "quality": "orange",
+   "desc": "闪避 +8%；主动：光学隐匿",
+   "cls": null,
+   "active": "光学隐匿",
+   "fromBoss": null
+  },
+  {
+   "id": "microgenerator",
+   "name": "微型发电机",
+   "slot": "body",
+   "quality": "purple",
+   "desc": "主动：放电",
+   "cls": null,
+   "active": "放电",
+   "fromBoss": null
+  },
+  {
+   "id": "heat_exchanger",
+   "name": "散热器",
+   "slot": "body",
+   "quality": "blue",
+   "desc": "防御 +2；主动：散热护盾",
+   "cls": null,
+   "active": "散热护盾",
+   "fromBoss": null
+  },
+  {
+   "id": "berserk",
+   "name": "狂暴系统",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "攻击 +2；主动：狂暴",
+   "cls": null,
+   "active": "狂暴",
+   "fromBoss": null
+  },
+  {
+   "id": "reflex_tuner",
+   "name": "反射协调",
+   "slot": "spine",
+   "quality": "orange",
+   "desc": "闪避 +6%；主动：反射加速",
+   "cls": null,
+   "active": "反射加速",
+   "fromBoss": null
+  },
+  {
+   "id": "pain_editor",
+   "name": "疼痛编辑器",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "防御 +3，生命 +8；主动：痛觉阻断",
+   "cls": null,
+   "active": "痛觉阻断",
+   "fromBoss": null
+  },
+  {
+   "id": "cyberdeck",
+   "name": "赛博甲板",
+   "slot": "spine",
+   "quality": "red",
+   "desc": "暴击 +6%；主动：快速破解",
+   "cls": null,
+   "active": "快速破解",
+   "fromBoss": null
+  },
+  {
+   "id": "adrenal_booster",
+   "name": "肾上腺增强",
+   "slot": "spine",
+   "quality": "blue",
+   "desc": "攻击 +1，暴击 +4%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "bio_conductor",
+   "name": "生物导体",
+   "slot": "spine",
+   "quality": "purple",
+   "desc": "主动：链式电弧",
+   "cls": null,
+   "active": "链式电弧",
+   "fromBoss": null
+  },
+  {
+   "id": "target_analysis",
+   "name": "目标分析",
+   "slot": "eye",
+   "quality": "orange",
+   "desc": "暴击 +8%，残血伤害 +15%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "thermal_optics",
+   "name": "热成像义眼",
+   "slot": "eye",
+   "quality": "purple",
+   "desc": "视野 +3；主动：热源扫描",
+   "cls": null,
+   "active": "热源扫描",
+   "fromBoss": null
+  },
+  {
+   "id": "quantum_processor",
+   "name": "量子处理器",
+   "slot": "eye",
+   "quality": "red",
+   "desc": "暴击 +10%，闪避 +5%；主动：预测闪避",
+   "cls": null,
+   "active": "预测闪避",
+   "fromBoss": null
+  },
+  {
+   "id": "reinforced_tendons",
+   "name": "强化肌腱",
+   "slot": "leg",
+   "quality": "purple",
+   "desc": "闪避 +6%；主动：超级跳跃",
+   "cls": null,
+   "active": "超级跳跃",
+   "fromBoss": null
+  },
+  {
+   "id": "silent_soles",
+   "name": "静音鞋底",
+   "slot": "leg",
+   "quality": "blue",
+   "desc": "闪避 +4%",
+   "cls": null,
+   "active": null,
+   "fromBoss": null
+  },
+  {
+   "id": "kinetic_legs",
+   "name": "动能腿甲",
+   "slot": "leg",
+   "quality": "orange",
+   "desc": "生命 +10，防御 +2；主动：动能践踏",
+   "cls": null,
+   "active": "动能践踏",
+   "fromBoss": null
+  }
+ ]
+}

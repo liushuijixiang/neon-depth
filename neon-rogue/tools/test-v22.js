@@ -1,0 +1,38 @@
+const { chromium } = require('playwright'), path = require('path'), assert = require('assert'); const ROOT = path.resolve(__dirname, '..');
+(async () => {
+  const b = await chromium.launch({ args: ['--no-sandbox'] }); const page = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1.5, hasTouch: true });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.addInitScript(() => { localStorage.setItem('neon-depth-mute', '1'); localStorage.removeItem('neon-depth-run'); localStorage.setItem('neon-depth-story', JSON.stringify({ scenes: { intro: 1, first_death: 1 } })); localStorage.setItem('neon-depth-codex', JSON.stringify({ monsters: { drone: 1, blade_runner: 1 }, items: {}, consumables: {}, buffs: {} })); });
+  await page.goto('file://' + path.join(ROOT, 'dist.debug.html')); await page.waitForTimeout(300);
+  const out = [];
+  const ok = (n, p, d) => out.push({ n, p: !!p, d });
+  // scroll keep: stash with many chips, tap filter pill near bottom
+  const keep = await page.evaluate(async () => { const N = window.__neon; N.meta.cores = 900; for (let i = 0; i < 40; i++) N.meta.stash.chips.push(N.makeChip('atk', 'gray')); N.meta.stash.cyber.push({ id: 'eye_gray', chips: [] }); N.test.ui.marketScreen('stash'); N.G.market.stashTab = 'chips'; N.test.v18.renderMarket(); const c = document.querySelector('.card'); c.scrollTop = 600; const before = c.scrollTop; document.querySelector('[data-bq="chips|green"]').onclick(); await new Promise(r => setTimeout(r, 50)); return [before, document.querySelector('.card').scrollTop]; });
+  ok('同界面重绘保留滚动位置', keep[0] > 0 && Math.abs(keep[0] - keep[1]) < 3, keep);
+  const conf = await page.evaluate(() => { const N = window.__neon; N.G.market.tab = 'chip'; N.test.v18.renderMarket(); const c0 = N.meta.cores, n0 = N.meta.stash.chips.length; const b = document.querySelector('[data-mchip="gray"]'); b.onclick(); const after1 = N.meta.stash.chips.length; b.onclick(); return [n0, after1, N.meta.stash.chips.length, c0, N.meta.cores]; });
+  ok('核心购买需二次确认', conf[0] === conf[1] && conf[2] === conf[1] + 1, conf);
+  const hud = await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'assault'; G.trainPending = false; N.startGame(); N.test.hideOverlay(); G.paused = false; G.modal = null; G.storyQueue = []; N.updateHUD(); const meta = document.querySelector('.hud .meta'); const kids = [...meta.children].filter(e => getComputedStyle(e).display !== 'none'); const cs = kids.map(e => { const r = e.getBoundingClientRect(); return r.top + r.height / 2; }); return { rows: Math.max(...cs) - Math.min(...cs) < 6 ? 1 : 2, atk: getComputedStyle(document.querySelector('#atk')).display, cls: document.querySelectorAll('.clsrow2 .kbtn,.clsrow2 .kwrap').length, shock: !!document.querySelector('[data-act="shock"]'), mini: !!document.querySelector('.kmini') }; });
+  ok('HUD 标识一排、隐藏 ATK', hud.rows === 1 && hud.atk === 'none', hud);
+  ok('突击技能排：开火/冲刺/军械库，无震荡', hud.cls >= 3 && !hud.shock, hud);
+  const rl = await page.evaluate(() => { const N = window.__neon, G = N.G; G.ammo = 3; N.updateHUD(); const mini = !!document.querySelector('.kmini'); G.ammo = 0; N.updateHUD(); return [mini, !!document.querySelector('[data-act="reload"].kbtn'), !document.querySelector('[data-act="fire"]')]; });
+  ok('有弹时换弹小标记，空弹匣换成换弹格', rl.every(Boolean), rl);
+  const eng = await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'engineer'; N.startGame(); N.test.hideOverlay(); G.modal = null; G.skills.act_wall = 1; G.skills.act_drone = 1; N.updateHUD(); return document.querySelectorAll('.clsrow2 [data-ab]').length; });
+  ok('工程相位壁障/蜂群僚机技能化', eng === 2, eng);
+  const gh = await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'ghost'; N.startGame(); N.test.hideOverlay(); G.modal = null; G.burnout = true; N.recalc(); N.updateHUD(); const n = document.querySelectorAll('[data-gburn]').length; const s = window.NEON.monsters.find(m => m.ai === 'chase' && !m.boss); const e = N.test.spawnEnemy(s, N.p.x + 1, N.p.y, 3); e.hp = e.maxHp = 9999; e.stun = 99; G.map[e.y][e.x] = 0; G.enemies.push(e); N.computeFOV(); N.p.hp = 10; const hp0 = e.hp; document.querySelector('[data-gburn="reap"]').click(); return [n, e.hp < hp0, N.p.hp > 10 || true]; });
+  ok('幽灵烧毁近战技能组', gh[0] === 3 && gh[1], gh);
+  const dr = await page.evaluate(() => { const N = window.__neon, G = N.G, V = N.test.v18; N.test.story.ST.dreams.bd_rocker = 1; V.dreamBegin(V.DREAMS.find(d => d.id === 'bd_rocker')); N.test.hideOverlay(); G.modal = null; N.updateHUD(); return [!!document.querySelector('[data-act="fire"],[data-act="reload"]'), document.querySelectorAll('[data-act^="dream:"]').length]; });
+  ok('超梦不显示通用职业技能', !dr[0] && dr[1] === 3, dr);
+  const cap = await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'assault'; G.mode = 'normal'; N.startGame(); N.test.hideOverlay(); G.chips = []; for (let i = 0; i < 38; i++) N.addChipObject(N.makeChip('atk', 'gray')); return [G.chips.length, G.items.filter(i => i.chip).length]; });
+  ok('芯片盒容量限制（基础 30）', cap[0] === 30 && cap[1] >= 1, cap);
+  const drops = await page.evaluate(() => { const N = window.__neon, G = N.G, V = N.test.v18; G.depth = 7; N.startFloor(); N.test.hideOverlay(); G.items = []; const e = V.spawnPsychoEnemy(7, true); e.hp = 0; N.killEnemy(e); const pos = G.items.filter(i => i.mod || i.chip).map(i => i.x + ',' + i.y); return [pos.length, new Set(pos).size]; });
+  ok('精神病掉落不重叠', drops[0] > 1 && drops[0] === drops[1], drops);
+  const codex = await page.evaluate(async () => { const N = window.__neon; N.test.hideOverlay(); N.G.state = 'menu'; N.test.ui.menuScreen(); N.test.ui.menuScreen('ember'); document.querySelector('[data-mnact="codex"]').click(); await new Promise(r => setTimeout(r, 100)); return [document.querySelectorAll('.mcard').length, document.querySelectorAll('canvas[data-mon]').length, document.querySelectorAll('.mcard.unseen').length]; });
+  ok('图鉴显示怪物模型卡片', codex[0] > 30 && codex[1] === codex[0] && codex[2] > 0, codex);
+  const hid = await page.evaluate(() => { const N = window.__neon; N.test.ui.menuScreen('ember'); document.querySelector('[data-mnact="ach"]').click(); return document.querySelectorAll('.ach.hid').length; });
+  ok('隐藏成就显示为？？？', hid >= 8, hid);
+  const b16 = await page.evaluate(() => { const N = window.__neon, G = N.G; N.meta.b16 = 1; G.classId = 'assault'; N.startGame(); N.test.hideOverlay(); N.test.b16.enterB16(); N.test.hideOverlay(); return [G.mode, G.enemies.filter(e => e.corpObj === 'line').length === 3, G.depth]; });
+  ok('B16 是三条生产线', b16[1] && b16[2] === 16, b16);
+  out.push({ n: '无脚本异常', p: errs.length === 0, d: errs });
+  out.forEach(c => console.log((c.p ? '✓ ' : '✗ ') + c.n + (c.p ? '' : ' ' + String(JSON.stringify(c.d)).slice(0, 300))));
+  await b.close(); assert(out.every(c => c.p));
+})().catch(e => { console.error(e); process.exit(1); });

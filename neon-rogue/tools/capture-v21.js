@@ -1,0 +1,22 @@
+const { chromium } = require('playwright'), path = require('path'); const ROOT = path.resolve(__dirname, '..');
+(async () => {
+  const b = await chromium.launch({ args: ['--no-sandbox'] }); const page = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1.5 });
+  const errs = []; page.on('pageerror', e => errs.push(e.message));
+  await page.addInitScript(() => { localStorage.setItem('neon-depth-mute', '1'); localStorage.setItem('neon-depth-story', JSON.stringify({ scenes: { intro: 1 } }));
+    localStorage.setItem('neon-depth-meta', JSON.stringify({ cores: 900, up: {}, stash: { cyber: [{ id: 'hand_red', chips: [] }, { id: 'eye_blue', chips: [] }, { id: 'body_purple', chips: [] }, { id: 'leg_gray', chips: [] }, { id: 'mass_3', chips: [] }, { id: 'spine_orange', chips: [] }], chips: [] }, tickets: [] })); });
+  await page.goto('file://' + path.join(ROOT, 'dist.debug.html'));
+  await page.evaluate(() => { const N = window.__neon; for (let i = 0; i < 14; i++) N.meta.stash.chips.push(N.makeChip(['atk', 'crit', 'power', 'hp', 'critdmg', 'skill', 'dodge'][i % 7], ['gray', 'green', 'blue', 'purple', 'orange', 'red'][i % 6])); N.meta.stash.chips[2].locked = true; N.meta.stash.cyber[0].chips = [N.makeChip('atk', 'red'), N.makeChip('crit', 'blue')]; });
+  const shot = async (n, fn) => { await page.evaluate(fn); await page.waitForTimeout(450); await page.screenshot({ path: path.join(ROOT, 'shots', 'v21-' + n + '.png') }); };
+  const M = (t, extra) => `(() => { const N = window.__neon; N.test.ui.marketScreen ? N.test.ui.marketScreen('${t}') : null; ${extra || ''} })()`;
+  await shot('stashcy', () => { window.__neon.test.ui.marketScreen('stash'); });
+  await shot('stashchip', () => { const G = window.__neon.G; G.market.stashTab = 'chips'; window.__neon.test.v18.renderMarket(); });
+  await shot('forgeaug', () => { const G = window.__neon.G; G.market.tab = 'forge'; window.__neon.test.v18.renderMarket(); });
+  await shot('forgechip', () => { const G = window.__neon.G; G.market.forgeTab = 'chip'; window.__neon.test.v18.renderMarket(); });
+  await shot('chiptab', () => { const G = window.__neon.G; G.market.tab = 'chip'; window.__neon.test.v18.renderMarket(); });
+  await shot('ticket', () => { const G = window.__neon.G; G.market.tab = 'ticket'; window.__neon.test.v18.renderMarket(); });
+  await page.evaluate(() => { const N = window.__neon, G = N.G; G.classId = 'assault'; N.startGame(); N.test.hideOverlay(); G.paused = false; G.modal = null; G.storyQueue = []; N.applyMod(N.mods.find(m => m.id === 'hand_red')); for (let i = 0; i < 8; i++) N.addChipObject(N.makeChip(['atk', 'crit', 'power', 'hp'][i % 4], ['blue', 'purple', 'red', 'green'][i % 4])); N.test.hideOverlay(); });
+  await shot('sockets', () => { const N = window.__neon, G = N.G; N.test.ui.openCyber(); G.cyberItem = 'hand_red'; N.test.ui.renderCyber(); });
+  await page.evaluate(() => { const c = document.querySelector('.cx-h:nth-of-type(1)'); const s = document.querySelector('.sockets'); s && s.scrollIntoView(); });
+  await page.waitForTimeout(200); await page.screenshot({ path: path.join(ROOT, 'shots', 'v21-sockets2.png') });
+  console.log('errors', JSON.stringify(errs)); await b.close();
+})();

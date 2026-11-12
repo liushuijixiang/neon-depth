@@ -1,0 +1,17 @@
+{
+  "name": "霓虹深潜 · NEON DEPTH",
+  "short_name": "霓虹深潜",
+  "description": "赛博朋克回合制地牢 Roguelike：改装义体、镶嵌芯片，在过载与失控之间下潜 15 层。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#04060b",
+  "theme_color": "#04060b",
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
